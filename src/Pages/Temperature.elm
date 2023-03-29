@@ -68,13 +68,13 @@ update msg model =
 
 
 toFahrenheit : Float -> Float
-toFahrenheit t =
-    t * 9 / 5 + 32
+toFahrenheit c =
+    c * 9 / 5 + 32
 
 
 fromFahrenheit : Float -> Float
-fromFahrenheit t =
-    t - 32 * 5 / 9
+fromFahrenheit f =
+    (f - 32) * 5 / 9
 
 
 
