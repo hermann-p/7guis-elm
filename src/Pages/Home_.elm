@@ -1,22 +1,21 @@
 module Pages.Home_ exposing (view)
 
+import Element exposing (centerX, centerY, column, spacing, text)
 import Gen.Route as Route
-import Html exposing (a, h3, li, text, ul)
-import Html.Attributes exposing (href)
+import UI exposing (link)
 import View exposing (View)
 
 
 view : View msg
 view =
     { title = "7GUIs"
-    , body =
-        [ h3 [] [ text "7GUIs challenge in plain Elm" ]
-        , ul []
-            [ li []
-                [ a [ href (Route.toHref Route.Counter) ] [ text "Counter" ]
-                , li [] [ a [ href (Route.toHref Route.Temperature) ] [ text "Temperature converter" ] ]
-                , li [] [ a [ href (Route.toHref Route.Flights) ] [ text "Flight Booker" ] ]
+    , element =
+        Element.column [ spacing 32, centerX, centerY ]
+            [ text "7GUIs challenge in plain Elm"
+            , column [ spacing 16 ]
+                [ link { url = Route.toHref Route.Counter, label = text "Counter" }
+                , link { url = Route.toHref Route.Temperature, label = text "Temperature converter" }
+                , link { url = Route.toHref Route.Flights, label = text "Flight booker" }
                 ]
             ]
-        ]
     }

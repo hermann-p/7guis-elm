@@ -1,5 +1,7 @@
 module Pages.Temperature exposing (Model, Msg, page)
 
+import Element exposing (Element, centerX, centerY, column, spacing)
+import Element.Input as Input
 import Gen.Params.Temperature exposing (Params)
 import Html exposing (Html, div, input, text)
 import Html.Attributes exposing (placeholder, type_, value)
@@ -81,30 +83,26 @@ fromFahrenheit f =
 -- VIEW
 
 
-content : Model -> Html Msg
+content : Model -> Element Msg
 content model =
-    div []
-        [ input
-            [ onInput SetCelsius
-            , type_ "text"
-            , placeholder "°C"
-            , value model.celsius
-            ]
-            []
-        , text "Celsius ="
-        , input
-            [ onInput SetFahrenheit
-            , type_ "text"
-            , placeholder "°F"
-            , value model.fahrenheit
-            ]
-            []
-        , text "Fahrenheit"
+    column [ spacing 32, centerX, centerY ]
+        [ Input.text []
+            { onChange = SetCelsius
+            , text = model.celsius
+            , placeholder = Just <| Input.placeholder [] <| Element.text "°C"
+            , label = Input.labelAbove [] <| Element.text "Celsius"
+            }
+        , Input.text []
+            { onChange = SetFahrenheit
+            , text = model.fahrenheit
+            , placeholder = Just <| Input.placeholder [] <| Element.text "°F"
+            , label = Input.labelAbove [] <| Element.text "Fahrenheit"
+            }
         ]
 
 
 view : Model -> View Msg
 view model =
     { title = "7GUIs - Temparature Converter"
-    , body = [ content model ]
+    , element = content model
     }

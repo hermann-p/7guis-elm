@@ -1,12 +1,12 @@
 module Pages.Counter exposing (Model, Msg, page)
 
+import Element exposing (Element, centerX, centerY, column, spacing, text)
 import Gen.Params.Counter exposing (Params)
-import Html exposing (Html, button, div, text)
-import Html.Events exposing (onClick)
 import Page
 import Request
 import Shared
 import String exposing (fromInt)
+import UI exposing (button)
 import View exposing (View)
 
 
@@ -54,13 +54,13 @@ update msg model =
 view : Model -> View Msg
 view model =
     { title = "7GUIs - Counter"
-    , body = [ counter model ]
+    , element = counter model
     }
 
 
-counter : Model -> Html Msg
+counter : Model -> Element Msg
 counter model =
-    div []
-        [ div [] [ text <| fromInt model.count ]
-        , button [ onClick Increase ] [ text "Increase count" ]
+    column [ spacing 40, centerX, centerY ]
+        [ text <| fromInt model.count
+        , button { onPress = Just Increase, label = text "Increase" }
         ]
